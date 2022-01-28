@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-
-int Daysofyear(int year, int mon, int day) {//×Óº¯Êı£¬Çó¸ÃÈÕÆÚÔÚ¸ÃÄêµÄÌìÊı²¢·µ»Ø
+//è¾“å…¥ä¸¤ä¸ªæ—¥æœŸï¼ˆå¹´ æœˆ æ—¥ å¹´ æœˆ æ—¥ï¼‰ï¼Œ è¾“å‡ºè¿™ä¸¤ä¸ªæ—¥æœŸä¹‹é—´å·®å¤šå°‘å¤©
+int Daysofyear(int year, int mon, int day) {//å­å‡½æ•°ï¼Œæ±‚è¯¥æ—¥æœŸåœ¨è¯¥å¹´çš„å¤©æ•°å¹¶è¿”å›
 	int a[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	int days = 0;
 	for (int i = 0; i < mon - 1; i++) {
@@ -23,11 +23,11 @@ int main() {
 		int i,sum=0;
 		if ((year1 > year2) || (year1 == year2 && mon1 > mon2) || (year1 == year2 && mon1 == mon2 && day1 > day2)) {
 			for (i = year2; i < year1; i++) {
-				sum += (365 + (i % 4 == 0 && i % 100 != 0 || i % 400 == 0));//ÏÈËãÄê·İ¼ä¸ôÌìÊıÈòÄê¶à¼Ó1
+				sum += (365 + (i % 4 == 0 && i % 100 != 0 || i % 400 == 0));//å…ˆç®—å¹´ä»½é—´éš”å¤©æ•°é—°å¹´å¤šåŠ 1
 			}
-			int days1 = Daysofyear(year1, mon1, day1);//·Ö±ğÇóÁ½¸öÈÕÆÚÔÚµ±ÄêÖĞÌìÊı
+			int days1 = Daysofyear(year1, mon1, day1);//åˆ†åˆ«æ±‚ä¸¤ä¸ªæ—¥æœŸåœ¨å½“å¹´ä¸­å¤©æ•°
 			int days2 = Daysofyear(year2, mon2, day2);
-			sum = sum + days1 - days2;                //Äê·İ¼ä¸ôÌìÊı¼õÈ¥Ğ¡ÈÕÆÚÌìÊı¼ÓÉÏ´óÈÕÆÚÌìÊı  
+			sum = sum + days1 - days2;                //å¹´ä»½é—´éš”å¤©æ•°å‡å»å°æ—¥æœŸå¤©æ•°åŠ ä¸Šå¤§æ—¥æœŸå¤©æ•°  
 		}
 		else {
 			for (i = year1; i < year2; i++) {
@@ -37,7 +37,7 @@ int main() {
 			int days2 = Daysofyear(year2, mon2, day2);
 			sum = sum + days2 - days1;
 		}
-		printf("%04d-%02d-%02dÓë%04d-%02d-%02dÏà¾à%dÌì", year1, mon1, day1, year2, mon2, day2, sum);
+		printf("%04d-%02d-%02dä¸%04d-%02d-%02dç›¸è·%då¤©", year1, mon1, day1, year2, mon2, day2, sum);
 }
 	system("pause");
 	return 0;
