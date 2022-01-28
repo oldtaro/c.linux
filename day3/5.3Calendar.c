@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-
-int Daysofyear(int year, int mon, int day) {//×Óº¯Êı£¬Çó¸ÃÈÕÆÚÔÚ¸ÃÄêµÄÌìÊı²¢·µ»Ø
+//è¾“å…¥ä¸€ä¸ªæ—¥æœŸï¼Œè¾“å‡ºè¯¥æ—¥æœŸæ˜¯æ˜ŸæœŸå‡ 
+int Daysofyear(int year, int mon, int day) {//å­å‡½æ•°ï¼Œæ±‚è¯¥æ—¥æœŸåœ¨è¯¥å¹´çš„å¤©æ•°å¹¶è¿”å›
 	int a[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	int days = 0;
 	for (int i = 0; i < mon - 1; i++) {
@@ -17,14 +17,14 @@ int Daysofyear(int year, int mon, int day) {//×Óº¯Êı£¬Çó¸ÃÈÕÆÚÔÚ¸ÃÄêµÄÌìÊı²¢·µ»Ø
 	return days;
 }
 
-int DuringDays(int year,int mon, int day ) {//ÒÔ2020-1-5£¨ĞÇÆÚÈÕ£©Îª»ù×¼ÈÕÆÚ
+int DuringDays(int year,int mon, int day ) {//ä»¥2020-1-5ï¼ˆæ˜ŸæœŸæ—¥ï¼‰ä¸ºåŸºå‡†æ—¥æœŸ
 	int i, sum = 0;
 		if ((year > 2020) || (year == 2020 && mon > 1) || (year == 2020 && mon == 1 && day > 5)) {
 			for (i = 2020; i < year; i++) {
-				sum += (365 + (i % 4 == 0 && i % 100 != 0 || i % 400 == 0));//ÏÈËãÄê·İ¼ä¸ôÌìÊıÈòÄê¶à¼Ó1
+				sum += (365 + (i % 4 == 0 && i % 100 != 0 || i % 400 == 0));//å…ˆç®—å¹´ä»½é—´éš”å¤©æ•°é—°å¹´å¤šåŠ 1
 			}
-			int days = Daysofyear(year, mon, day);//ÇóÈÕÆÚÔÚµ±ÄêÖĞÌìÊı
-			sum = sum + days - 5;                //Äê·İ¼ä¸ôÌìÊı¼õÈ¥Ğ¡ÈÕÆÚÌìÊı¼ÓÉÏ´óÈÕÆÚÌìÊı  
+			int days = Daysofyear(year, mon, day);//æ±‚æ—¥æœŸåœ¨å½“å¹´ä¸­å¤©æ•°
+			sum = sum + days - 5;                //å¹´ä»½é—´éš”å¤©æ•°å‡å»å°æ—¥æœŸå¤©æ•°åŠ ä¸Šå¤§æ—¥æœŸå¤©æ•°  
 		}
 		else {
 			for (i = year; i < 2020; i++) {
@@ -38,18 +38,18 @@ int DuringDays(int year,int mon, int day ) {//ÒÔ2020-1-5£¨ĞÇÆÚÈÕ£©Îª»ù×¼ÈÕÆÚ
 int main() {
 	int year, mon, day;
 	while (scanf("%d%d%d", &year, &mon, &day) != EOF) {
-		int d = DuringDays(year, mon, day);//µ÷ÓÃ×Óº¯ÊıÇóÓë»ù×¼¼ä¸ôÈÕÆÚ
+		int d = DuringDays(year, mon, day);//è°ƒç”¨å­å‡½æ•°æ±‚ä¸åŸºå‡†é—´éš”æ—¥æœŸ
 		if ((year > 2020) || (year == 2020 && mon > 1) || (year == 2020 && mon == 1 && day > 5)) {
 			d = d % 7;
-		}//ÈôÔÚ»ù×¼Ö®ºó£¬Ö±½Ó¼ä¾àÈ¡Óà
+		}//è‹¥åœ¨åŸºå‡†ä¹‹åï¼Œç›´æ¥é—´è·å–ä½™
 		else {
 			d = 7-d%7;
 		}
 		if (d != 0) {
-				printf("%04d-%02d-%02dÊÇĞÇÆÚ%d\n", year, mon, day, d);
+				printf("%04d-%02d-%02dæ˜¯æ˜ŸæœŸ%d\n", year, mon, day, d);
 		}
 			else {
-			printf("%04d-%02d-%02dÊÇĞÇÆÚÈÕ\n", year, mon, day);
+			printf("%04d-%02d-%02dæ˜¯æ˜ŸæœŸæ—¥\n", year, mon, day);
 		}
 	}
 	system("pause");
