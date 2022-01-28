@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-
+//è¾“å…¥å¹´æœˆæ—¥ï¼Œè¾“å‡ºè¯¥æ—¥æœŸæ˜¯å½“å¹´çš„ç¬¬å‡ å¤©
 int main() {
 	int year,mon,day;
 	int a[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
@@ -10,13 +10,13 @@ int main() {
 		for (int i = 0; i < mon - 1; i++) {
 			days += a[i];
 		}
-		if (mon > 2) {//ÈòÄê´óÓÚ¶şÔÂ·İÒª¶à¼ÓÉÏÒ»Ìì
+		if (mon > 2) {//é—°å¹´å¤§äºäºŒæœˆä»½è¦å¤šåŠ ä¸Šä¸€å¤©
 			days += (day + (year % 4 == 0 && year % 100 != 0 || year % 400 == 0));
 		}
 		else {
 			days += day;
 		}
-		printf("%04d-%02d-%02dÊÇ¸ÃÄêµÚ%3dÌì", year, mon, day, days);
+		printf("%04d-%02d-%02dæ˜¯è¯¥å¹´ç¬¬%3då¤©", year, mon, day, days);
      }
 	system("pause");
 	return 0;
