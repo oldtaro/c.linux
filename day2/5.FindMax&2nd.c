@@ -21,7 +21,7 @@ int main() {
 			max2 = a[i];
 		}
 	}
-	printf("最大值是%d,次大值是%d", max1, max2);
+	printf("脳卯麓贸脰碌脢脟%d,麓脦麓贸脰碌脢脟%d", max1, max2);
 	system("pause");
 	return 0;
 }
