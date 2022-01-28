@@ -1,5 +1,5 @@
 #include <func.h>
-//聊天服务器端
+//服务器端
 int main(int argc,char* argv[]){
     ARGS_CHECK(argc,3);
     int serfd,cfd;
