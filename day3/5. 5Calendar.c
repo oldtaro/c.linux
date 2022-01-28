@@ -1,8 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-
-int Daysofyear(int year, int mon, int day) {//×Óº¯Êı£¬Çó¸ÃÈÕÆÚÔÚ¸ÃÄêµÄÌìÊı²¢·µ»Ø
+//è¾“å…¥ä¸€ä¸ªå¹´ä»½,æœˆä»½ï¼Œè¾“å‡ºè¯¥æœˆä»½çš„æ—¥å†
+int Daysofyear(int year, int mon, int day) {//å­å‡½æ•°ï¼Œæ±‚è¯¥æ—¥æœŸåœ¨è¯¥å¹´çš„å¤©æ•°å¹¶è¿”å›
 	int a[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	int days = 0;
 	for (int i = 0; i < mon - 1; i++) {
@@ -17,14 +17,14 @@ int Daysofyear(int year, int mon, int day) {//×Óº¯Êı£¬Çó¸ÃÈÕÆÚÔÚ¸ÃÄêµÄÌìÊı²¢·µ»Ø
 	return days;
 }
 
-int DuringDays(int year, int mon, int day) {//ÒÔ2020-1-5£¨ĞÇÆÚÈÕ£©Îª»ù×¼ÈÕÆÚ
+int DuringDays(int year, int mon, int day) {//ä»¥2020-1-5ï¼ˆæ˜ŸæœŸæ—¥ï¼‰ä¸ºåŸºå‡†æ—¥æœŸ
 	int i, sum = 0;
 	if ((year > 2020) || (year == 2020 && mon > 1) || (year == 2020 && mon == 1 && day > 5)) {
 		for (i = 2020; i < year; i++) {
-			sum += (365 + (i % 4 == 0 && i % 100 != 0 || i % 400 == 0));//ÏÈËãÄê·İ¼ä¸ôÌìÊıÈòÄê¶à¼Ó1
+			sum += (365 + (i % 4 == 0 && i % 100 != 0 || i % 400 == 0));//å…ˆç®—å¹´ä»½é—´éš”å¤©æ•°é—°å¹´å¤šåŠ 1
 		}
-		int days = Daysofyear(year, mon, day);//ÇóÈÕÆÚÔÚµ±ÄêÖĞÌìÊı
-		sum = sum + days - 5;                //Äê·İ¼ä¸ôÌìÊı¼õÈ¥Ğ¡ÈÕÆÚÌìÊı¼ÓÉÏ´óÈÕÆÚÌìÊı  
+		int days = Daysofyear(year, mon, day);//æ±‚æ—¥æœŸåœ¨å½“å¹´ä¸­å¤©æ•°
+		sum = sum + days - 5;                //å¹´ä»½é—´éš”å¤©æ•°å‡å»å°æ—¥æœŸå¤©æ•°åŠ ä¸Šå¤§æ—¥æœŸå¤©æ•°  
 	}
 	else {
 		for (i = year; i < 2020; i++) {
@@ -36,10 +36,10 @@ int DuringDays(int year, int mon, int day) {//ÒÔ2020-1-5£¨ĞÇÆÚÈÕ£©Îª»ù×¼ÈÕÆÚ
 	return sum;
 }
 int DayOfWeek(int year, int mon, int day) {
-		int d = DuringDays(year, mon, day);//µ÷ÓÃ×Óº¯ÊıÇóÓë»ù×¼¼ä¸ôÈÕÆÚ
+		int d = DuringDays(year, mon, day);//è°ƒç”¨å­å‡½æ•°æ±‚ä¸åŸºå‡†é—´éš”æ—¥æœŸ
 		if ((year > 2020) || (year == 2020 && mon > 1) || (year == 2020 && mon == 1 && day > 5)) {
 			d = d % 7;
-		}//ÈôÔÚ»ù×¼Ö®ºó£¬Ö±½Ó¼ä¾àÈ¡Óà
+		}//è‹¥åœ¨åŸºå‡†ä¹‹åï¼Œç›´æ¥é—´è·å–ä½™
 		else {
 			d = 7 - d % 7;
 		}
@@ -51,15 +51,15 @@ int  main() {
 	int year, mon;
 	while(scanf("%04d%02d",&year,&mon)!=EOF) {
 		printf("---The Calendar of %04d-%02d---\n SUN MON TUE WED THU FRI SAT\n",year,mon);
-		int t = DayOfWeek(year, mon, 1),mondays;//ÏÈ»ñµÃ¸ÃÔÂ1ºÅĞÇÆÚ¼¸
+		int t = DayOfWeek(year, mon, 1),mondays;//å…ˆè·å¾—è¯¥æœˆ1å·æ˜ŸæœŸå‡ 
 		if (mon == 2) {
 			mondays = a[mon - 1] + (year % 4 == 0 && year % 100 != 0 || year % 400 == 0);
 		}
 		else {
 			mondays = a[mon - 1];
-		}                             //Çó¸ÃÔÂÌìÊı
+		}                             //æ±‚è¯¥æœˆå¤©æ•°
 		for (int i = 1; i <= mondays; i++) {
-			if (i == 1) {                     //ÏÈ´òÓ¡´ø¿ÕÎ»µÄµÚÒ»ĞĞ
+			if (i == 1) {                     //å…ˆæ‰“å°å¸¦ç©ºä½çš„ç¬¬ä¸€è¡Œ
 				for (int j = 0; j<t%7; j++) {
 					printf("    ");
 				}
@@ -68,7 +68,7 @@ int  main() {
 						printf("\n");
 					}
 			}
-			else {                   //ÔÙ´òÓ¡Ê£ÓàÈÕÆÚ
+			else {                   //å†æ‰“å°å‰©ä½™æ—¥æœŸ
 				if ((i + t) % 7==0) {
 					printf("%4d\n",i);
 				}
