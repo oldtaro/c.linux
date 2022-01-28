@@ -1,7 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-int Daysofyear(int year, int mon, int day) {//×Óº¯Êı£¬Çó¸ÃÈÕÆÚÔÚ¸ÃÄêµÄÌìÊı²¢·µ»Ø
+//è¾“å…¥ ä¸€ä¸ªæ—¥æœŸ å’Œä¸€ä¸ªæ•´æ•° nï¼Œè¾“å‡ºä»è¯¥æ—¥æœŸèµ·ç»è¿‡nå¤©ä»¥åçš„æ—¥æœŸ
+int Daysofyear(int year, int mon, int day) {//å­å‡½æ•°ï¼Œæ±‚è¯¥æ—¥æœŸåœ¨è¯¥å¹´çš„å¤©æ•°å¹¶è¿”å›
 	int a[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	int days = 0;
 	for (int i = 0; i < mon - 1; i++) {
@@ -17,11 +18,11 @@ int Daysofyear(int year, int mon, int day) {//×Óº¯Êı£¬Çó¸ÃÈÕÆÚÔÚ¸ÃÄêµÄÌìÊı²¢·µ»Ø
 }
 
 int main() {
-	printf("ÊäÈëÈÕÆÚ£¬ºÍÖ®ºóÌìÊı");
+	printf("è¾“å…¥æ—¥æœŸï¼Œå’Œä¹‹åå¤©æ•°");
 	int a[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	int year, mon, day,n;
 	while (scanf("%d%d%d%d", &year, &mon, &day,&n) != EOF) {
-		int k = n + Daysofyear(year,mon,day);//ÏÈ½«ÈÕÆÚ¶ÔÆäµ½¸ÃÄê1ÔÂ1ÈÕ£¬·½±ã¼ÆËãÈòÔÂ
+		int k = n + Daysofyear(year,mon,day);//å…ˆå°†æ—¥æœŸå¯¹å…¶åˆ°è¯¥å¹´1æœˆ1æ—¥ï¼Œæ–¹ä¾¿è®¡ç®—é—°æœˆ
 		int year1, mon1;
 		for (year1 = year; k > (365+(year1%4==0&&year1%100!=0||year1%400==1)); year1++) {
 			k -= (365 + (year1 % 4 == 0 && year1 % 100 != 0 || year1 % 400 == 1));
@@ -34,7 +35,7 @@ int main() {
 				k -= a[mon1];
 			}
 		}
-		printf("%04d-%02d-%02dÖ®ºóµÚ%dÌìÊÇ%04d-%02d-%02d", year, mon, day, n, year1, mon1, k);
+		printf("%04d-%02d-%02dä¹‹åç¬¬%då¤©æ˜¯%04d-%02d-%02d", year, mon, day, n, year1, mon1, k);
 	}
 	system("pause");
 	return 0;
