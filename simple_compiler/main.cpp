@@ -35,6 +35,8 @@ static TkWord keywords[] = {//将token值与关键字对应起来
 	{KW_CHAR,"char",NULL},
 	{KW_SHORT,"short",NULL},
 	{KW_INT,"int",NULL},
+	{KW_FLOAT,"float",NULL},
+	{KW_DOUBLE,"double",NULL},
 	{KW_VOID,"void",NULL},
 	{KW_STRUCT,"struct",NULL},
 
@@ -57,29 +59,49 @@ int main() {
 	int i,err_num;
 	vector<string> word;
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	while (getline(file,str)) {
+	system("chcp 65001");
+	while (getline(file, str)) {
 		word.clear();
-		err_num=split(word, str);
+		err_num = split(word, str);
 		for (i = 0; i < word.size(); i++) {
-			temp=word.at(i);
+			temp = word.at(i);
 			cur = hashtable[elf_hash(temp)];
-			if (cur != NULL && cur->spelling == temp) {
-				printcolor(temp, (tokencode)cur->tkcode);
+			int j = elf_hash(temp);
+			if (cur != NULL) {//已经枚举名称由hash表快速取得token值打印
+				if ((cur->spelling).compare(temp) == 0) {
+					printcolor(temp, (tokencode)cur->tkcode);
+					continue;
+				}
+				else {
+					cur = cur->next;
+					while (cur!=NULL) {
+						if ((cur->spelling).compare(temp) == 0) {
+							printcolor(temp, (tokencode)cur->tkcode);
+							break;
+						}
+						cur = cur->next;
+					}
+					if (cur != NULL) {
+						continue;
+					}
+				}
 			}
-			else if (temp[0]=='"'||temp[0]=='\''||isdigit(temp[0])) {
+			if (temp[0] == '"' || temp[0] == '\'' || isdigit(temp[0])) {//常量棕色
 				SetConsoleTextAttribute(h, FOREGROUND_RED | FOREGROUND_GREEN);
-				cout<<temp;
-			}
-			else if (temp[0]=='/'&&temp[1]=='/') {
-				SetConsoleTextAttribute(h,FOREGROUND_GREEN);
 				cout << temp;
 			}
-			else {
+			else if (temp[0] == '/' && temp[1] == '/') {//备注绿色
+				SetConsoleTextAttribute(h, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 				cout << temp;
-			}	
+			}
+			else {//函数名，变量名灰色
+				SetConsoleTextAttribute(h, FOREGROUND_INTENSITY);
+				cout << temp;
+			}
 		}
 		cout << endl;
 	}
+	SetConsoleTextAttribute(h, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 	system("pause");
 	return 0;
 }

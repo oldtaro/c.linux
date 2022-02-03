@@ -4,8 +4,10 @@ void printcolor(string str,tokencode token) {
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	if (token >= TK_IDENT) { //函数灰色
 		SetConsoleTextAttribute(h, FOREGROUND_INTENSITY);
-	}else if (token >= KW_CHAR) { //关键字绿色
-        SetConsoleTextAttribute(h, FOREGROUND_GREEN| FOREGROUND_INTENSITY);
+	}else if (token>=KW_IF) {//控制语句关键字紫色
+		SetConsoleTextAttribute(h, FOREGROUND_BLUE | FOREGROUND_RED);
+	}else if (token >= KW_CHAR) { //数据类型关键字蓝色
+        SetConsoleTextAttribute(h, FOREGROUND_BLUE| FOREGROUND_INTENSITY);
 	}else if (token >= TK_CINT) { //常量褐色
 		SetConsoleTextAttribute(h, FOREGROUND_RED | FOREGROUND_GREEN);
 	}else if (token >= TK_PLUS) {  //运算符红色
@@ -27,21 +29,33 @@ int elf_hash(string key) {
 		g = h & 0xf0000000;
 		if (g)
 			h ^= g >> 24;
-		h &= -g;
+		h &= ~g;
 	}
 	return h % MAXKEY;
 }
-//初始化关键字哈希表
+//初始化关键字哈希表，拉链法简单处理一下冲突
 void InitHashTable(TkWord keywords[],int length,pTkWord hashtable[]) {
-	for (int i = 0; i < length; i++) {
-		hashtable[elf_hash(keywords[i].spelling)] = &keywords[i];
+	int i, j;
+	pTkWord p;
+	for (i = 0; i < length; i++) {
+		j = elf_hash(keywords[i].spelling);
+		if (hashtable[j]==NULL) {
+			hashtable[j] = &keywords[i];
+		}
+		else {
+			p= hashtable[j];
+			while (p->next != NULL) {
+				p = p->next;
+			}
+			p->next = &keywords[i];
+		}
 	}
 }
 //划分
 int split(vector<string> &word,string str) {
 	string temp;
 	for (int i = 0; i < str.length(); i++) {
-		if (isalnum(str[i])||str[i]=='_') {//变量名以字母或‘_’打头,关键字字母打头
+		if (isalpha(str[i])||str[i]=='_') {//变量名以字母或‘_’打头,关键字字母打头
 			temp.clear();
 			while (isalnum(str[i]) || str[i] == '_') {
 				temp.push_back(str[i++]);
@@ -55,10 +69,10 @@ int split(vector<string> &word,string str) {
 				temp.push_back(str[i++]);
 				}
 			if(str[i]=='.'){
-				temp.push_back('.');
-			}
-			while (isdigit(str[i])) {
 				temp.push_back(str[i++]);
+				while (isdigit(str[i])) {
+					temp.push_back(str[i++]);
+				}
 			}
 			word.push_back(temp);
 			i--;
@@ -83,11 +97,10 @@ int split(vector<string> &word,string str) {
 		}
 		else if (str[i]=='/'&&str[i+1]=='/') {//备注
 			temp.clear();
-			while (str[i]!='\n') {
-				temp.push_back(str[i]);
+			while (str[i]) {
+				temp.push_back(str[i++]);
 			}
 			word.push_back(temp);
-			i--;
 		}
 		else if (str[i]=='\t') {
 			temp.clear();

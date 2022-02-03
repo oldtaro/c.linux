@@ -1,3 +1,8 @@
+/*参考了课上的模板增加了一些新功能和改进：
+* 1.增加备注着色
+* 2.区别了数据类型关键字和控制语句关键字着色
+* 3.简单处理了hash冲突 "]"和文件结束符,其他未发现
+*/
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,6 +56,8 @@ enum e_TokenCode
 	KW_CHAR,		// char关键字
 	KW_SHORT,		// short关键字
 	KW_INT,			// int关键字
+	KW_FLOAT,		//float关键字
+	KW_DOUBLE,		//double关键字
 	KW_VOID,		// void关键字  
 	KW_STRUCT,		// struct关键字   
 	KW_IF,			// if关键字
