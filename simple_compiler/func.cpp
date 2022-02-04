@@ -10,6 +10,8 @@ void printcolor(string str,tokencode token) {
         SetConsoleTextAttribute(h, FOREGROUND_BLUE| FOREGROUND_INTENSITY);
 	}else if (token >= TK_CINT) { //常量褐色
 		SetConsoleTextAttribute(h, FOREGROUND_RED | FOREGROUND_GREEN);
+	}else if (token >= TK_NOTES) {  //备注绿色
+		SetConsoleTextAttribute(h, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 	}else if (token >= TK_PLUS) {  //运算符红色
 		SetConsoleTextAttribute(h, FOREGROUND_RED | FOREGROUND_INTENSITY);
 	}
@@ -33,7 +35,7 @@ int elf_hash(string key) {
 	}
 	return h % MAXKEY;
 }
-//初始化关键字哈希表，拉链法简单处理一下冲突
+//初始化关键字哈希表，拉链法处理冲突，']'和EOF冲突了
 void InitHashTable(TkWord keywords[],int length,pTkWord hashtable[]) {
 	int i, j;
 	pTkWord p;

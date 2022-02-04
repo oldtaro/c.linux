@@ -1,8 +1,3 @@
-/*参考了课上的模板增加了一些新功能和改进：
-* 1.增加备注着色
-* 2.区别了数据类型关键字和控制语句关键字着色
-* 3.简单处理了hash冲突 "]"和文件结束符,其他未发现
-*/
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,6 +40,7 @@ enum e_TokenCode
 	TK_COMMA,		// , 逗号
 	TK_ELLIPSIS,	// ... 省略号
 	TK_EOF,			// 文件结束符
+	TK_NOTES,		// //注释
 
 	/* 常量 */
 	TK_CINT,		// 整型常量
@@ -63,6 +59,7 @@ enum e_TokenCode
 	KW_IF,			// if关键字
 	KW_ELSE,		// else关键字
 	KW_FOR,			// for关键字
+	KW_WHILE,		//while关键字
 	KW_CONTINUE,	// continue关键字
 	KW_BREAK,		// break关键字   
 	KW_RETURN,		// return关键字

@@ -26,6 +26,7 @@ static TkWord keywords[] = {//将token值与关键字对应起来
 	{TK_COMMA,",",NULL},
 	{TK_ELLIPSIS,"...",NULL},
 	{TK_EOF,"End Of File",NULL},
+	{TK_NOTES,"//",NULL},
 
 	{TK_CINT,"整形常量",NULL},
 	{TK_CFLOAT,"浮点型常量",NULL},
@@ -43,10 +44,11 @@ static TkWord keywords[] = {//将token值与关键字对应起来
 	{KW_IF,"if",NULL},
 	{KW_ELSE,"else",NULL},
 	{KW_FOR,"for",NULL},
+	{KW_WHILE,"while",NULL },
 	{KW_CONTINUE,"continue",NULL},
 	{KW_BREAK,"break",NULL},
 	{KW_RETURN,"return",NULL},
-	{40}//TK_IDENT
+	{TK_IDENT}//TK_IDENT
 };
 
 int main() {
@@ -56,10 +58,9 @@ int main() {
 	ifstream file;
 	file.open("test.txt",ios::in);
 	string str,temp;
-	int i,err_num;
+	int i, err_num, cur_token;
 	vector<string> word;
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	system("chcp 65001");
 	while (getline(file, str)) {
 		word.clear();
 		err_num = split(word, str);
@@ -67,12 +68,11 @@ int main() {
 			temp = word.at(i);
 			cur = hashtable[elf_hash(temp)];
 			int j = elf_hash(temp);
-			if (cur != NULL) {//已经枚举名称由hash表快速取得token值打印
+			if (cur != NULL) {//
 				if ((cur->spelling).compare(temp) == 0) {
 					printcolor(temp, (tokencode)cur->tkcode);
 					continue;
-				}
-				else {
+				}else {
 					cur = cur->next;
 					while (cur!=NULL) {
 						if ((cur->spelling).compare(temp) == 0) {
@@ -86,18 +86,18 @@ int main() {
 					}
 				}
 			}
-			if (temp[0] == '"' || temp[0] == '\'' || isdigit(temp[0])) {//常量棕色
-				SetConsoleTextAttribute(h, FOREGROUND_RED | FOREGROUND_GREEN);
-				cout << temp;
+			if (temp[0] == '"' ) {//常量
+				cur_token = TK_CSTR;
+			}else if(temp[0] == '\''){
+				cur_token = TK_CCHAR;
+			}else if (isdigit(temp[0])) {
+				cur_token = TK_CINT;
+			}else if (temp[0] == '/' && temp[1] == '/') {//备注
+				cur_token = TK_NOTES;
+			}else {//函数名，变量名
+				cur_token = TK_IDENT;
 			}
-			else if (temp[0] == '/' && temp[1] == '/') {//备注绿色
-				SetConsoleTextAttribute(h, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-				cout << temp;
-			}
-			else {//函数名，变量名灰色
-				SetConsoleTextAttribute(h, FOREGROUND_INTENSITY);
-				cout << temp;
-			}
+			printcolor(temp,(tokencode)cur_token);
 		}
 		cout << endl;
 	}
