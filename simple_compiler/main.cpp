@@ -58,17 +58,17 @@ int main() {
 	ifstream file;
 	file.open("test.txt",ios::in);
 	string str,temp;
-	int i, err_num, cur_token;
+	int i, cur_token;
 	vector<string> word;
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	while (getline(file, str)) {
 		word.clear();
-		err_num = split(word, str);
+		split(word, str);
 		for (i = 0; i < word.size(); i++) {
 			temp = word.at(i);
 			cur = hashtable[elf_hash(temp)];
 			int j = elf_hash(temp);
-			if (cur != NULL) {//
+			if (cur != NULL) {//直接可以hash从hash表中取得对应token值的字符
 				if ((cur->spelling).compare(temp) == 0) {
 					printcolor(temp, (tokencode)cur->tkcode);
 					continue;

@@ -80,4 +80,4 @@ typedef struct TkWord {
 void printcolor(string str, tokencode token);//颜色打印
 int elf_hash(string key);//哈希函数
 void InitHashTable(TkWord keywords[], int length, pTkWord hashtable[]);//哈希表初始化
-int split(vector<string>& word, string str);//划分
+void split(vector<string>& word, string str);//划分

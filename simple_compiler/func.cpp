@@ -54,19 +54,17 @@ void InitHashTable(TkWord keywords[],int length,pTkWord hashtable[]) {
 	}
 }
 //划分
-int split(vector<string> &word,string str) {
+void split(vector<string> &word,string str) {
 	string temp;
 	for (int i = 0; i < str.length(); i++) {
+		temp.clear();
 		if (isalpha(str[i])||str[i]=='_') {//变量名以字母或‘_’打头,关键字字母打头
-			temp.clear();
 			while (isalnum(str[i]) || str[i] == '_') {
 				temp.push_back(str[i++]);
 			}
 			word.push_back(temp);
 			i--;
-		}
-		else if (isdigit(str[i])) {//数字常量以数字打头
-			temp.clear();
+		}else if (isdigit(str[i])) {//数字常量以数字打头
 			while (isdigit(str[i])) {
 				temp.push_back(str[i++]);
 				}
@@ -78,42 +76,39 @@ int split(vector<string> &word,string str) {
 			}
 			word.push_back(temp);
 			i--;
-		}
-		else if (str[i]=='"') {//字符串常量
-			temp.clear();
+		}else if (str[i]=='"') {//字符串常量
 			temp.push_back(str[i++]);
 			while (str[i] !='"') {
 				temp.push_back(str[i++]);
 			}
 			temp.push_back(str[i]);
 			word.push_back(temp);
-		}
-		else if (str[i] =='\'') {//字符常量
-			temp.clear();
+		}else if (str[i] =='\'') {//字符常量
 			temp.push_back(str[i++]);
 			while (str[i] != '\'') {
 				temp.push_back(str[i++]);
 			}
 			temp.push_back(str[i]);
 			word.push_back(temp);
-		}
-		else if (str[i]=='/'&&str[i+1]=='/') {//备注
-			temp.clear();
+		}else if (str[i]=='/'&&str[i+1]=='/') {//备注
 			while (str[i]) {
 				temp.push_back(str[i++]);
 			}
 			word.push_back(temp);
-		}
-		else if (str[i]=='\t') {
-			temp.clear();
+		}else if (str[i]=='\t') {
 			temp.insert(0,4,' ');
 			word.push_back(temp);
-		}
-		else if(isprint(str[i])) {//其余可打印字符单个存储
-			temp.clear();
+		}else if ((str[i] == '='|| str[i] =='>' || str[i] =='<' || str[i] =='!') && str[i + 1] == '=') {
+			temp.push_back(str[i++]);
+			temp.push_back(str[i]);
+			word.push_back(temp);
+		}else if(str[i] == '-'&&str[i+1]=='>') {
+			temp.push_back(str[i++]);
+			temp.push_back(str[i]);
+			word.push_back(temp);
+		}else if(isprint(str[i])) {//其余可打印字符单个存储
 			temp.push_back(str[i]);
 			word.push_back(temp);
 		}
 	}
-	return 0;
 }
