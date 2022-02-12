@@ -5,17 +5,11 @@ int main(void){
     int n,i;
     double sum,min,max,cur;
     while(scanf("%d",&n)!=EOF){
-        for(i=0,sum=0;i<n;i++){
-            if(i){
-                scanf("%lf",&cur);
-                sum+=cur;
-                if(cur>max) max=cur;
-                if(cur<min) min=cur;
-            }else{
-                scanf("%lf",&sum);
-                min=sum;
-                max=sum;
-            }
+        for(i=1,scanf("%lf",&sum),min=sum,max=sum;i<n;i++){
+            scanf("%lf",&cur);
+            sum+=cur;
+            if(cur>max) max=cur;
+            if(cur<min) min=cur;
         }
         printf("%.2lf\n",(sum-min-max)/(double)(n-2));
     }
