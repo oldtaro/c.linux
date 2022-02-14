@@ -4,7 +4,7 @@ int main(void){
     int stu_score[50][5],stu,sbj;
     float stu_avg[50],sbj_avg[5];
     int i,j,stu_sum,sbj_sum,n;
-    while(scanf("%d%d",&stu,&sbj)){
+    while(scanf("%d%d",&stu,&sbj)!=EOF){
         for(i=0;i<stu;i++){
             for(stu_sum=0,j=0;j<sbj;j++){
                 scanf("%d",&stu_score[i][j]);
