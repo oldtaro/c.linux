@@ -1,0 +1,69 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CC	Makefile	/^CC:=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS:=-g -I \/usr\/include\/mysql -I ..\/include$/;"	m
+Compute_file_md5	Md5Maker.c	/^int Compute_file_md5(char *file_path, char *md5_str)$/;"	f
+MD5Decode	Md5Maker.c	/^void MD5Decode(unsigned int *output, unsigned char *input, unsigned int len)$/;"	f
+MD5Encode	Md5Maker.c	/^void MD5Encode(unsigned char *output,unsigned int *input,unsigned int len)$/;"	f
+MD5Final	Md5Maker.c	/^void MD5Final(MD5_CTX *context, unsigned char digest[16])$/;"	f
+MD5Init	Md5Maker.c	/^void MD5Init(MD5_CTX *context)$/;"	f
+MD5Transform	Md5Maker.c	/^void MD5Transform(unsigned int state[4], unsigned char block[64])$/;"	f
+MD5Update	Md5Maker.c	/^void MD5Update(MD5_CTX *context, unsigned char *input, unsigned int inputlen)$/;"	f
+Makesalt	passwd.c	/^int Makesalt(char *str)$/;"	f
+OBJS	Makefile	/^OBJS:=$(patsubst %.c,%.o,$(SRCS))$/;"	m
+PADDING	Md5Maker.c	/^unsigned char PADDING[] =$/;"	v
+SRCS	Makefile	/^SRCS:=$(wildcard *.c) #拿到当前目录下所有的c文件$/;"	m
+arg_set	func.c	/^int arg_set(char* line, char* arg){	$/;"	f
+cd_func	func.c	/^void cd_func(cmd_train cmd,client_state* pc_state){$/;"	f
+clean_func	factory.c	/^void clean_func(void* p){$/;"	f
+client_exit_func	func.c	/^void client_exit_func(int epfd,client_state* pc_state){$/;"	f
+deque	work_que.c	/^void deque(pque_t pque,pnode_t* ppnode){$/;"	f
+epoll_add	factory.c	/^int epoll_add(int epfd, int fd){$/;"	f
+epoll_del	factory.c	/^int epoll_del(int epfd,int fd){$/;"	f
+exit_fds	main.c	/^int exit_fds[2];$/;"	v
+exit_func	main.c	/^void exit_func(int signum){$/;"	f
+factory_init	factory.c	/^void factory_init(pfactory_t pf,int thread_num,int capacity){$/;"	f
+factory_start	factory.c	/^int factory_start(pfactory_t pf,int thread_num){$/;"	f
+file_info_delete	mysql_func.c	/^int file_info_delete(char* file_name,int precode,int usr_id)$/;"	f
+file_is_exist	mysql_func.c	/^int file_is_exist(char* md5)$/;"	f
+file_pool_delete	mysql_func.c	/^int file_pool_delete(char* md5)$/;"	f
+file_size_inpool	mysql_func.c	/^int file_size_inpool(char* md5,char* file_size)$/;"	f
+getsalt	passwd.c	/^void getsalt(char *salt,char* passwd)$/;"	f
+index_add	mysql_func.c	/^int index_add(char* md5)$/;"	f
+init_arg	func.c	/^int init_arg(char* ip, char* port){$/;"	f
+inque	work_que.c	/^void inque(pque_t pque,pnode_t pnew){$/;"	f
+insert_file_pool	mysql_func.c	/^int insert_file_pool(char* md5,off_t file_size){$/;"	f
+insert_new_file	mysql_func.c	/^int insert_new_file(int precode,char type,int usr_id,char* file_name,int file_size,char* md5){$/;"	f
+is_que_full	work_que.c	/^int is_que_full(que_t que){$/;"	f
+ls_func	func.c	/^void ls_func(client_state c_state){$/;"	f
+main	main.c	/^int main(){$/;"	f
+mission_inque	func.c	/^void mission_inque(int epfd,client_state* pc_state,factory_t* pfac){$/;"	f
+mkdir_func	func.c	/^void mkdir_func(cmd_train cmd,client_state c_state){$/;"	f
+mysql_insert	mysql_func.c	/^int mysql_insert(char* table_name,char* column,char* insert_info)$/;"	f
+mysql_update	mysql_func.c	/^int mysql_update(char* table_name,char* cond_column,char* cond_info,char* update_column,char* update_info)$/;"	f
+next_level_file	mysql_func.c	/^int next_level_file(int code,char* file_name,int res_colum,char* res_info)$/;"	f
+out	Makefile	/^out:=taro_ns$/;"	m
+pwd_check	passwd.c	/^int pwd_check(pwd_t* ppt,int cfd)$/;"	f
+pwd_func	func.c	/^void pwd_func(client_state c_state){$/;"	f
+que_destory	work_que.c	/^void que_destory(pque_t pque){$/;"	f
+que_init	work_que.c	/^void que_init(pque_t pque,int capacity){$/;"	f
+recv_cmd	func.c	/^void recv_cmd(cmd_train* p,int fd){$/;"	f
+recv_total	factory.c	/^int recv_total(int serfd,void* buf,off_t length,off_t offset){\/\/循环接收至全部被接收$/;"	f
+remove_func	func.c	/^void remove_func(char* file_name,int precode,int usr_id){$/;"	f
+seek_child_file	mysql_func.c	/^int seek_child_file(int code,int usr_id,int res_colum,char* res_info)$/;"	f
+seek_file_info	mysql_func.c	/^int seek_file_info(char* cond_column,int code,int res_colum,char* res_info)$/;"	f
+send_cmd	func.c	/^void send_cmd(cmd_train* p,int fd){$/;"	f
+send_total	factory.c	/^int send_total(int cfd,void* buf,off_t length,off_t offset){\/\/循环发送至全部被接收$/;"	f
+tcp_init	factory.c	/^int tcp_init(int* pserfd,char* ip,char* port){$/;"	f
+thread_mission	factory.c	/^void* thread_mission(void* pf){$/;"	f
+two_cond_seek	mysql_func.c	/^int two_cond_seek(int precode,char* file_name,char* res_info,int res_num)$/;"	f
+update_file_size	mysql_func.c	/^int update_file_size(int precode,char* file_name,off_t file_size)$/;"	f
+update_size_inpool	mysql_func.c	/^int update_size_inpool(char* md5,off_t file_size)$/;"	f
+usr_gets_file	factory.c	/^int usr_gets_file(int cfd,char* md5){$/;"	f
+usr_puts_file	factory.c	/^int usr_puts_file(int cfd,char* md5,off_t* pfile_size){$/;"	f
+usr_register	passwd.c	/^int usr_register(pwd_t* ppt,int cfd){$/;"	f
+usrinfo_seek	mysql_func.c	/^int usrinfo_seek(char* usr_name,int res_colum,char* res_info)$/;"	f

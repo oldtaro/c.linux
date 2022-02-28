@@ -1,0 +1,40 @@
+net_disk4.0 3.5期
+server IP,port 在配置文件中
+thread_num,capacityz在head.h 中38，39行宏定义
+
+1.用户验证登陆,注册。服务器端存储盐值，密文有用户登录发送盐值，接收密文验证
+2.线程池初始化
+3.初始化tcp连接
+4.虚拟文件系统
+5.主线程实现短命令 ls,pwd,cd,mkdir,remove,exit 错误命令不响应
+6.服务器退出机制，fork()一个子进程，父进程协助子进程退出
+7.文件上传：未上传文件，上传至文件池，在文件信息表中记录；已上传的相同文件，
+秒传，仅修改文件信息，文件池中文件引用计数+1；上传未完成文件，将偏移发给客户
+端，客户端从断点继续传送。
+8.下载文件，客户端上传下载文件都在指定路径 ./file文件夹下
+9.目录及文件的删除
+
+无超时断开，token验证重连，下载断点续传   
+
+client
+1.登录接收盐值，输入密码，计数密文发送给服务器
+2.短命令的输入发送，结果接收输出
+3.上传下载，先通知服务器分配线程，在开始逐个传输文件
+
+已经注册用户：
+    lzy 1234
+    taro 1234
+    lilei 1234
+
+mysql 建表查询语句
+create database net_disk;
+use net_disk;
+-- 用户信息表
+create table usr_info(id int not null auto_increment,primary key(id),usr_name varchar(50),salt varchar(15),usr_pwd vachar(200));
+-- 文件表
+create table file_info(code int not null auto_increment,primary key(code),precode int,type varchar(1),usr_id int,file_name varchar(50),file_size int,md5 varchar(100));
+-- 文件池
+create table file_pool(code int not null auto_increment,primary key(code),index_count int,file_size int,md5 varchar(100));
+
+
+
